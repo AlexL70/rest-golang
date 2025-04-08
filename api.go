@@ -24,6 +24,7 @@ func (s *APIServer) Run() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/hello", handleGreet)
+	router.HandleFunc("/post", handlePost)
 
 	fmt.Printf("Starting server on address %s\n", s.addr)
 	http.ListenAndServe(s.addr, router)
