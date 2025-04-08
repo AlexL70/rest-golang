@@ -1,10 +1,19 @@
 package main
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 // GreetRes is the response structure for the greeting endpoint.
 type GreetRes struct {
 	Hello string `json:"hello"`
+}
+
+type CreatePostPayload struct {
+	Title   string `json:"title"`
+	Content string `json:"content"`
 }
 
 type Post struct {
@@ -12,4 +21,12 @@ type Post struct {
 	Title     string    `json:"title" gorm:"uniqueIndex"`
 	Content   string    `json:"content" gorm:"not null"`
 	CreatedAt time.Time `json:"created_at" gorm:"<-:create"`
+}
+
+type PostRepo interface {
+	createPost(post *Post) (*Post, error)
+}
+
+type postRepo struct {
+	db *gorm.DB
 }

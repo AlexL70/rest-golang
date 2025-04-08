@@ -10,21 +10,24 @@ import (
 
 type APIServer struct {
 	addr string
-	db   *gorm.DB
+	repo PostRepo
 }
 
 func NewAPIServer(addr string, db *gorm.DB) *APIServer {
 	return &APIServer{
 		addr: addr,
-		db:   db,
+		repo: &postRepo{
+			db: db,
+		},
 	}
 }
 
 func (s *APIServer) Run() {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/hello", handleGreet)
-	router.HandleFunc("/post", handlePost)
+	router.HandleFunc("/hello", s.handleGreet).Methods("GET")
+	router.HandleFunc("/post", s.handleGetPost).Methods("GET")
+	router.HandleFunc("/post", s.handleSavePost).Methods("POST")
 
 	fmt.Printf("Starting server on address %s\n", s.addr)
 	http.ListenAndServe(s.addr, router)
