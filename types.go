@@ -17,7 +17,7 @@ type CreatePostPayload struct {
 }
 
 type Post struct {
-	ID        uint      `json:"id" gorm:"primaryKey"`
+	ID        uint64    `json:"id" gorm:"primaryKey"`
 	Title     string    `json:"title" gorm:"uniqueIndex"`
 	Content   string    `json:"content" gorm:"not null"`
 	CreatedAt time.Time `json:"created_at" gorm:"<-:create"`
@@ -25,6 +25,7 @@ type Post struct {
 
 type PostRepo interface {
 	createPost(post *Post) (*Post, error)
+	getPost(id uint64) (*Post, error)
 }
 
 type postRepo struct {

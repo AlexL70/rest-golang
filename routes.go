@@ -2,8 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"strconv"
 	"time"
+
+	"github.com/gorilla/mux"
 )
 
 func (s *APIServer) handleGreet(w http.ResponseWriter, r *http.Request) {
@@ -16,15 +20,21 @@ func (s *APIServer) handleGreet(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *APIServer) handleGetPost(w http.ResponseWriter, r *http.Request) {
-	// Handle the request to create a new post
+	id_str := mux.Vars(r)["id"]
+	id, err := strconv.ParseUint(id_str, 10, 32)
+	if err != nil {
+		err_str := fmt.Sprintf("Invalid post ID: \"%s\". Error parsing the value: positive integer expected.", id_str)
+		http.Error(w, err_str, http.StatusBadRequest)
+		return
+	}
+	res, err := s.repo.getPost(id)
+	if err != nil {
+		err_str := fmt.Sprintf("Post with ID %d not found. Error: %v", id, err.Error())
+		http.Error(w, err_str, http.StatusNotFound)
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	res := &Post{
-		ID:        1,
-		Title:     "Sample Post",
-		Content:   "This is a sample post content.",
-		CreatedAt: time.Now(),
-	}
 	json.NewEncoder(w).Encode(res)
 }
 
