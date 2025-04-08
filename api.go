@@ -5,15 +5,18 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"gorm.io/gorm"
 )
 
 type APIServer struct {
 	addr string
+	db   *gorm.DB
 }
 
-func NewAPIServer(addr string) *APIServer {
+func NewAPIServer(addr string, db *gorm.DB) *APIServer {
 	return &APIServer{
 		addr: addr,
+		db:   db,
 	}
 }
 
