@@ -8,14 +8,14 @@ import (
 )
 
 type APIServer struct {
-	addr       string
-	httpClient *http.Client
+	addr     string
+	kcClient KeycloakService
 }
 
 func NewAPIServer(addr string) *APIServer {
 	return &APIServer{
-		addr:       addr,
-		httpClient: &http.Client{},
+		addr:     addr,
+		kcClient: NewKCClient(),
 	}
 }
 
