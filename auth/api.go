@@ -8,12 +8,14 @@ import (
 )
 
 type APIServer struct {
-	addr string
+	addr       string
+	httpClient *http.Client
 }
 
 func NewAPIServer(addr string) *APIServer {
 	return &APIServer{
-		addr: addr,
+		addr:       addr,
+		httpClient: &http.Client{},
 	}
 }
 
@@ -21,6 +23,7 @@ func (s *APIServer) Run() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/hello", s.handleGreet).Methods("GET")
+	router.HandleFunc("/login", s.handleLogin).Methods("POST")
 
 	fmt.Printf("Starting server on address %s\n", s.addr)
 	http.ListenAndServe(s.addr, router)
