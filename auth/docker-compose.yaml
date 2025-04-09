@@ -1,0 +1,42 @@
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+  postgres_kc:
+    image: postgres:16.2
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak_pwd
+      POSTGRES_DB: keycloak
+    ports:
+      - "5435:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 1m
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.1.4
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres_kc
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_SCHEMA: public
+      DB_PASSWORD: keycloak_pwd
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      #JDBC_PARAMS: "ssl=true"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres_kc:
+        condition: service_healthy
+    command:
+      - start-dev
