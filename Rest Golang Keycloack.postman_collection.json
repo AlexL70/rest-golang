@@ -1,0 +1,580 @@
+{
+	"info": {
+		"_postman_id": "6fd6101b-5119-4fb3-8a30-78e8802788a6",
+		"name": "Rest Golang Keycloack",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1038162"
+	},
+	"item": [
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Create post",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"{{$guid}} Post Created Programmatically\",\r\n    \"content\": \"{{$randomAbbreviation}} content created programmatically\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{post_srv}}/post",
+							"host": [
+								"{{post_srv}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get post by id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{post_srv}}/post/:id",
+							"host": [
+								"{{post_srv}}"
+							],
+							"path": [
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Keycloack",
+			"item": [
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en-GB,en;q=0.9,uk-UA;q=0.8,uk;q=0.7,ru-UA;q=0.6,ru;q=0.5,en-US;q=0.4"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{keycloack}}/admin/realms/rest-golang/users/:user_id?userProfileMetadata=true",
+							"host": [
+								"{{keycloack}}"
+							],
+							"path": [
+								"admin",
+								"realms",
+								"rest-golang",
+								"users",
+								":user_id"
+							],
+							"query": [
+								{
+									"key": "userProfileMetadata",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "2fa20e1b-0fc4-479f-8c55-1b0ba7b807d0"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl 'http://zlinux:8080/admin/realms/rest-golang/users/2fa20e1b-0fc4-479f-8c55-1b0ba7b807d0?userProfileMetadata=true' \\\r\n  -H 'Accept-Language: en-GB,en;q=0.9,uk-UA;q=0.8,uk;q=0.7,ru-UA;q=0.6,ru;q=0.5,en-US;q=0.4' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36' \\\r\n  -H 'accept: application/json, text/plain, */*' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJVRWlNTGRFZE9NWDBKSEo4aTJfQUd2a3R5Z0Q5V3ZBMnhlNzIwZjRnblB3In0.eyJleHAiOjE3NDQxOTM1MzMsImlhdCI6MTc0NDE5MzQ3MywianRpIjoiYTQ0MDA4YjEtZjY2YS00YmRiLWIwZGEtODYyMDEzZjEwNzJjIiwiaXNzIjoiaHR0cDovL3psaW51eDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzZWN1cml0eS1hZG1pbi1jb25zb2xlIiwic2lkIjoiMDBjNzdmZWQtNGEzMy00MTQ4LWE3NjEtMTE4ZDRkYjcyZWZhIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCJ9.mum8d1wR6vLAzbw_XKK9zJOotnMJSz87keRggPrdGstERAN2PgkyMBkZCSbBT_kEd7ktqxMy49WdQbq8WwFRGxuHdpfp9ZcNp8Cn9cv66uMBG4L8Fk9mAcx21FYP8b59mmVSmq_gYAqshGjJiS84fTCRfwcqkznhnsHNB3u6zlW5XU22m08KXo-mg32j24iOHcZj0XvOL3wZyL6I68Bt1A5M5xczS19ihnxJ-BPqSPcM27TnnJuji8iE65ycEFzSpOHVrTPe4z2pgGgRh8U9tuFDsONtDEenE0DoDC-FccOlsTIY5sGkbRAPU405oO8JxhaFKWy0oELNCtawog2FaA' \\\r\n  -H 'content-type: application/json' \\\r\n  --insecure"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en-GB,en;q=0.9,uk-UA;q=0.8,uk;q=0.7,ru-UA;q=0.6,ru;q=0.5,en-US;q=0.4"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Origin",
+								"value": "http://zlinux:8080"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"attributes\":{\"locale\":\"\"},\"requiredActions\":[],\"emailVerified\":false,\"username\":\"son\",\"email\":\"alexander.levinson.70@gmail.com\",\"firstName\":\"Alexander\",\"lastName\":\"Levinson\",\"groups\":[],\"enabled\":true}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{keycloack}}/admin/realms/rest-golang/users",
+							"host": [
+								"{{keycloack}}"
+							],
+							"path": [
+								"admin",
+								"realms",
+								"rest-golang",
+								"users"
+							]
+						},
+						"description": "Generated from cURL: curl 'http://zlinux:8080/admin/realms/rest-golang/users' \\\r\n  -H 'Accept-Language: en-GB,en;q=0.9,uk-UA;q=0.8,uk;q=0.7,ru-UA;q=0.6,ru;q=0.5,en-US;q=0.4' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Origin: http://zlinux:8080' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36' \\\r\n  -H 'accept: application/json, text/plain, */*' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJVRWlNTGRFZE9NWDBKSEo4aTJfQUd2a3R5Z0Q5V3ZBMnhlNzIwZjRnblB3In0.eyJleHAiOjE3NDQxOTM1MzMsImlhdCI6MTc0NDE5MzQ3MywianRpIjoiYTQ0MDA4YjEtZjY2YS00YmRiLWIwZGEtODYyMDEzZjEwNzJjIiwiaXNzIjoiaHR0cDovL3psaW51eDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzZWN1cml0eS1hZG1pbi1jb25zb2xlIiwic2lkIjoiMDBjNzdmZWQtNGEzMy00MTQ4LWE3NjEtMTE4ZDRkYjcyZWZhIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCJ9.mum8d1wR6vLAzbw_XKK9zJOotnMJSz87keRggPrdGstERAN2PgkyMBkZCSbBT_kEd7ktqxMy49WdQbq8WwFRGxuHdpfp9ZcNp8Cn9cv66uMBG4L8Fk9mAcx21FYP8b59mmVSmq_gYAqshGjJiS84fTCRfwcqkznhnsHNB3u6zlW5XU22m08KXo-mg32j24iOHcZj0XvOL3wZyL6I68Bt1A5M5xczS19ihnxJ-BPqSPcM27TnnJuji8iE65ycEFzSpOHVrTPe4z2pgGgRh8U9tuFDsONtDEenE0DoDC-FccOlsTIY5sGkbRAPU405oO8JxhaFKWy0oELNCtawog2FaA' \\\r\n  -H 'content-type: application/json' \\\r\n  --data-raw '{\"attributes\":{\"locale\":\"\"},\"requiredActions\":[],\"emailVerified\":false,\"username\":\"son\",\"email\":\"alexander.levinson.70@gmail.com\",\"firstName\":\"Alexander\",\"lastName\":\"Levinson\",\"groups\":[],\"enabled\":true}' \\\r\n  --insecure"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en-GB,en;q=0.9,uk-UA;q=0.8,uk;q=0.7,ru-UA;q=0.6,ru;q=0.5,en-US;q=0.4"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Origin",
+								"value": "http://zlinux:8080"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"temporary\":false,\"type\":\"password\",\"value\":\"Roll2Back\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{keycloack}}/admin/realms/rest-golang/users/:user_id/reset-password",
+							"host": [
+								"{{keycloack}}"
+							],
+							"path": [
+								"admin",
+								"realms",
+								"rest-golang",
+								"users",
+								":user_id",
+								"reset-password"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "2fa20e1b-0fc4-479f-8c55-1b0ba7b807d0"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl 'http://zlinux:8080/admin/realms/rest-golang/users/2fa20e1b-0fc4-479f-8c55-1b0ba7b807d0/reset-password' \\\r\n  -X 'PUT' \\\r\n  -H 'Accept-Language: en-GB,en;q=0.9,uk-UA;q=0.8,uk;q=0.7,ru-UA;q=0.6,ru;q=0.5,en-US;q=0.4' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Origin: http://zlinux:8080' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36' \\\r\n  -H 'accept: application/json, text/plain, */*' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJVRWlNTGRFZE9NWDBKSEo4aTJfQUd2a3R5Z0Q5V3ZBMnhlNzIwZjRnblB3In0.eyJleHAiOjE3NDQxOTQ2MjgsImlhdCI6MTc0NDE5NDU2OCwianRpIjoiNWJhZmNiMTctZjE1Yy00OTc0LTg3ZTQtZjBjMTkxYWU3MTc1IiwiaXNzIjoiaHR0cDovL3psaW51eDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzZWN1cml0eS1hZG1pbi1jb25zb2xlIiwic2lkIjoiMDBjNzdmZWQtNGEzMy00MTQ4LWE3NjEtMTE4ZDRkYjcyZWZhIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCJ9.JWEkPioiZ2cUsEU4kOvu2C3X6Vs4ROylfhI53Jfjp8d-ywfh1bjJzhzH_iyw1aaUhg49rGo7cG7C6hPeExVKXLIs-55ZojD65uFguioevc9U9tmCpQWsuzL_IpLK5BmysgWUyUZVtIsLVEaBNrqDgk01AzbEJ4gZaeq0b341mzv9NcAPugIVDgtWIU3J02u755WRRw4mxNJmdok4Z5MjX6TkANM8OKenM5HhtgqxXZAD_llEBD01tltWTG8gzRtpiw_cn-aMQijlevas-IvYiV0PsLYX0U__O9JtSMqeI3X2dDwvNd9XCYijNUv7zQ67CdzRr8KQmg9B6x1uXz8nvQ' \\\r\n  -H 'content-type: application/json' \\\r\n  --data-raw '{\"temporary\":false,\"type\":\"password\",\"value\":\"Roll2Back\"}' \\\r\n  --insecure"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Keycloak",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-GB,en;q=0.9,uk-UA;q=0.8,uk;q=0.7,ru-UA;q=0.6,ru;q=0.5,en-US;q=0.4"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Content-type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Origin",
+								"value": "{{keycloack}}"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "AUTH_SESSION_ID=MDBjNzdmZWQtNGEzMy00MTQ4LWE3NjEtMTE4ZDRkYjcyZWZhLlBTWERJZ1JrWFZncTJ2RTRBVDRhdjhHWm1WRW1pRmZiU1IxU2NuZGp4SkQ2dTF6QmpxSGJyc2MzZFJnQjlxY005Wi1Yc1lzeU1NMnBlN2g4NVFZc0NR; KEYCLOAK_IDENTITY=eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJiMDgxOTg4OC04YzdiLTQ0NDYtYmIxNi1iMTZhMjEwM2RjMDkifQ.eyJleHAiOjE3NDQyMjgzNDEsImlhdCI6MTc0NDE5MjM0MSwianRpIjoiYWRiZDEyZWYtOTMyMS00NzVmLWFiZmMtYWY2Zjk3MDA4YTczIiwiaXNzIjoiaHR0cDovL3psaW51eDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiIyMzliMDczMC1iY2RlLTQ5YjctOTk2NC01YjRjYmMyNjQ3YzkiLCJ0eXAiOiJTZXJpYWxpemVkLUlEIiwic2lkIjoiMDBjNzdmZWQtNGEzMy00MTQ4LWE3NjEtMTE4ZDRkYjcyZWZhIiwic3RhdGVfY2hlY2tlciI6InNZUG9QelkyNC1xUmVUaWdVcy1PWDFVM1JYUEg4aGNFdTdpeFMwZzdtV1EifQ.jC8RZIyolG9SiqpH32rlCigYnjR6rLvXSR44Sc4FTdGvEPpkL9shwWWIgPwTjsMV82EA1-slLttpNuecjQth-Q; KEYCLOAK_SESSION=ntJbOKaJWT0hZ98POeg2BhATSEHF-CZHC3HCEZV7MnI",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{user_name}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{keycloack}}/realms/{{realm}}/protocol/openid-connect/token",
+							"host": [
+								"{{keycloack}}"
+							],
+							"path": [
+								"realms",
+								"{{realm}}",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						},
+						"description": "Generated from cURL: curl 'http://zlinux:8080/realms/master/protocol/openid-connect/token' \\\r\n  -H 'Accept: */*' \\\r\n  -H 'Accept-Language: en-GB,en;q=0.9,uk-UA;q=0.8,uk;q=0.7,ru-UA;q=0.6,ru;q=0.5,en-US;q=0.4' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-type: application/x-www-form-urlencoded' \\\r\n  -b 'AUTH_SESSION_ID=MDBjNzdmZWQtNGEzMy00MTQ4LWE3NjEtMTE4ZDRkYjcyZWZhLlBTWERJZ1JrWFZncTJ2RTRBVDRhdjhHWm1WRW1pRmZiU1IxU2NuZGp4SkQ2dTF6QmpxSGJyc2MzZFJnQjlxY005Wi1Yc1lzeU1NMnBlN2g4NVFZc0NR; KEYCLOAK_IDENTITY=eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJiMDgxOTg4OC04YzdiLTQ0NDYtYmIxNi1iMTZhMjEwM2RjMDkifQ.eyJleHAiOjE3NDQyMjgzNDEsImlhdCI6MTc0NDE5MjM0MSwianRpIjoiYWRiZDEyZWYtOTMyMS00NzVmLWFiZmMtYWY2Zjk3MDA4YTczIiwiaXNzIjoiaHR0cDovL3psaW51eDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiIyMzliMDczMC1iY2RlLTQ5YjctOTk2NC01YjRjYmMyNjQ3YzkiLCJ0eXAiOiJTZXJpYWxpemVkLUlEIiwic2lkIjoiMDBjNzdmZWQtNGEzMy00MTQ4LWE3NjEtMTE4ZDRkYjcyZWZhIiwic3RhdGVfY2hlY2tlciI6InNZUG9QelkyNC1xUmVUaWdVcy1PWDFVM1JYUEg4aGNFdTdpeFMwZzdtV1EifQ.jC8RZIyolG9SiqpH32rlCigYnjR6rLvXSR44Sc4FTdGvEPpkL9shwWWIgPwTjsMV82EA1-slLttpNuecjQth-Q; KEYCLOAK_SESSION=ntJbOKaJWT0hZ98POeg2BhATSEHF-CZHC3HCEZV7MnI' \\\r\n  -H 'Origin: http://zlinux:8080' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36' \\\r\n  --data-raw 'grant_type=refresh_token&refresh_token=eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJiMDgxOTg4OC04YzdiLTQ0NDYtYmIxNi1iMTZhMjEwM2RjMDkifQ.eyJleHAiOjE3NDQxOTY5MTAsImlhdCI6MTc0NDE5NTExMCwianRpIjoiNzY3ZmUwNWUtMDI3My00MDk3LWIwOGEtNDZlMGExYmZkNTRiIiwiaXNzIjoiaHR0cDovL3psaW51eDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJodHRwOi8vemxpbnV4OjgwODAvcmVhbG1zL21hc3RlciIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJzZWN1cml0eS1hZG1pbi1jb25zb2xlIiwic2lkIjoiMDBjNzdmZWQtNGEzMy00MTQ4LWE3NjEtMTE4ZDRkYjcyZWZhIiwic2NvcGUiOiJvcGVuaWQgYmFzaWMgYWNyIHByb2ZpbGUgZW1haWwgcm9sZXMgd2ViLW9yaWdpbnMifQ.V3Fn0OYWyUTVRfQT3rwuDUNC5DBrXR_xp1ozAM2MB_shZ002o8lYxwYmr9F8MT4e6dltBldqqZV-9bt4h4vmPw&client_id=security-admin-console' \\\r\n  --insecure"
+					},
+					"response": []
+				},
+				{
+					"name": "Introspect Keycloack",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-GB,en;q=0.9,uk-UA;q=0.8,uk;q=0.7,ru-UA;q=0.6,ru;q=0.5,en-US;q=0.4",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Origin",
+								"value": "{{keycloack}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "{{keycloack_bearer}}",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{keycloack}}/realms/{{realm}}/protocol/openid-connect/token/introspect",
+							"host": [
+								"{{keycloack}}"
+							],
+							"path": [
+								"realms",
+								"{{realm}}",
+								"protocol",
+								"openid-connect",
+								"token",
+								"introspect"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Hello",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{auth_srv}}/hello",
+							"host": [
+								"{{auth_srv}}"
+							],
+							"path": [
+								"hello"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `\r",
+									"<style type=\"text/css\">\r",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+									"    .tftable tr {background-color:#ffffff;}\r",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+									"    .tftable tr:hover {background-color:#e0ffff;}\r",
+									"</style>\r",
+									"\r",
+									"<table class=\"tftable\" border=\"1\">\r",
+									"    <tr>\r",
+									"        <th>Access Token</th>\r",
+									"        <th>Expires In</th>\r",
+									"        <th>Refresh Expires In</th>\r",
+									"        <th>Refresh Token</th>\r",
+									"        <th>Token Type</th>\r",
+									"        <th>Not Before Policy</th>\r",
+									"        <th>Session State</th>\r",
+									"        <th>Scope</th>\r",
+									"    </tr>\r",
+									"    <tr>\r",
+									"        <td>{{response.access_token}}</td>\r",
+									"        <td>{{response.expires_in}}</td>\r",
+									"        <td>{{response.refresh_expires_in}}</td>\r",
+									"        <td>{{response.refresh_token}}</td>\r",
+									"        <td>{{response.token_type}}</td>\r",
+									"        <td>{{response[\"not-before-policy\"]}}</td>\r",
+									"        <td>{{response.session_state}}</td>\r",
+									"        <td>{{response.scope}}</td>\r",
+									"    </tr>\r",
+									"</table>\r",
+									"`;\r",
+									"\r",
+									"function constructVisualizerPayload() {\r",
+									"    return { response: pm.response.json() }\r",
+									"}\r",
+									"\r",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{auth_srv}}/login",
+							"host": [
+								"{{auth_srv}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{keycloack_bearer}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "post_srv",
+			"value": "zlinux:3000",
+			"type": "string"
+		},
+		{
+			"key": "keycloack",
+			"value": "zlinux:8080",
+			"type": "string"
+		},
+		{
+			"key": "keycloack_bearer",
+			"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJVRWlNTGRFZE9NWDBKSEo4aTJfQUd2a3R5Z0Q5V3ZBMnhlNzIwZjRnblB3In0.eyJleHAiOjE3NDQxOTM1MzMsImlhdCI6MTc0NDE5MzQ3MywianRpIjoiYTQ0MDA4YjEtZjY2YS00YmRiLWIwZGEtODYyMDEzZjEwNzJjIiwiaXNzIjoiaHR0cDovL3psaW51eDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzZWN1cml0eS1hZG1pbi1jb25zb2xlIiwic2lkIjoiMDBjNzdmZWQtNGEzMy00MTQ4LWE3NjEtMTE4ZDRkYjcyZWZhIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCJ9.mum8d1wR6vLAzbw_XKK9zJOotnMJSz87keRggPrdGstERAN2PgkyMBkZCSbBT_kEd7ktqxMy49WdQbq8WwFRGxuHdpfp9ZcNp8Cn9cv66uMBG4L8Fk9mAcx21FYP8b59mmVSmq_gYAqshGjJiS84fTCRfwcqkznhnsHNB3u6zlW5XU22m08KXo-mg32j24iOHcZj0XvOL3wZyL6I68Bt1A5M5xczS19ihnxJ-BPqSPcM27TnnJuji8iE65ycEFzSpOHVrTPe4z2pgGgRh8U9tuFDsONtDEenE0DoDC-FccOlsTIY5sGkbRAPU405oO8JxhaFKWy0oELNCtawog2FaA",
+			"type": "string"
+		},
+		{
+			"key": "realm",
+			"value": "rest-golang",
+			"type": "string"
+		},
+		{
+			"key": "client_id",
+			"value": "rest-golang-auth",
+			"type": "string"
+		},
+		{
+			"key": "user_name",
+			"value": "son",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "Roll2Back",
+			"type": "string"
+		},
+		{
+			"key": "client_secret",
+			"value": "L0KdgEw6CUiW71Cb0GpgLMfCdrJfrYbD",
+			"type": "string"
+		},
+		{
+			"key": "auth_srv",
+			"value": "localhost:4000",
+			"type": "string"
+		}
+	]
+}
